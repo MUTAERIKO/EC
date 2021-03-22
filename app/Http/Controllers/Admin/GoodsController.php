@@ -81,7 +81,7 @@ class GoodsController extends Controller
 $goods =  $comment->goods;
 
 $data=[
-'subject' =>'コメントが投稿されました',
+'subject' =>'コメントが投稿されましたよ',
 'comment' =>$comment->comment,
 'template' => 'mail.reply',
 'name' =>'システムメール',
