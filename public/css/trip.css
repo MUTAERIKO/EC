@@ -1,0 +1,359 @@
+/* .all{
+  width:1000px;
+} */
+
+header{
+  background-color:white;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+
+.top{
+  width:100%;
+  height:100px;
+  margin: 0 auto;
+  display:flex;
+  justify-content: space-between;
+}
+
+.logo{
+  width:230px;
+}
+
+.top p {
+  width:20%;
+  height:50px;
+  display:flex;
+  margin-top:20px;
+  margin-left:15px;
+}
+
+.top ul{
+  display:flex;
+}
+
+.top ul li{
+  
+  list-style: none;
+  background-color:#192738	;
+  margin-top:30px;
+  margin-right:10px;
+  padding:8px;
+  color:white;
+  width:80px;
+  text-align:center;
+  border-radius:3px;
+}
+
+.sen{
+  width:5px;
+  height:2px;
+  margin:3px;
+}
+
+.kensaku{
+  text-align:center;
+}
+
+.kensaku-box{
+  width:60%;
+  height:45px;
+  margin-bottom:50px;
+  margin-top:3px;
+  border: 2px solid #192738;
+}
+
+.kensaku-soushin{
+  background-color:#192738;
+  width:100px;
+  height:50px;
+  color:white;
+}
+
+.humber{
+  background-color: blue;
+  color:white;
+  width:200px;
+  height:400px;
+  padding:30px;
+  transform:translateX(-300px);
+  transition:.3s ease-in-out;
+  z-index:5;
+  position:fixed;
+}
+
+#open {
+  display:none;
+}
+
+#open:checked ~ .humber {
+  transform:translateX(0);
+}
+
+#open:checked ~ .back {
+  position:absolute;
+  /* z-index:2; */
+  background-color: rgba(0, 0, 0, .5);
+  width:100%;
+  height:100%;
+}
+
+
+
+.main img{
+  width:100%;
+  height:300px;
+  clear:both;
+}
+
+.anime_test {
+  display:  block;                /* ブロック要素にする */
+  margin: 0 auto;                 /* 要素中央揃え */
+  position:  relative;            /* 位置指定 */
+  animation: anime1 3s ease;      /* アニメーション指定 */
+}
+
+@keyframes anime1 {
+  0% {
+      opacity:  0;                /* 透明度指定 */
+      top: 50px;                  /* 位置指定 */
+  }
+  100% {
+      opacity:  1;                /* 透明度指定 */
+      top: 0;                     /* 位置指定 */
+  }
+}
+
+
+
+.topic{
+  background-color:white;
+}
+
+.topickatamari{
+  float:left;
+}
+
+.topickatamari li{
+  margin-right:30px;
+  width:280px;
+  float:left;
+}
+
+.topickatamari li img{
+  object-fit: contain;
+  background-color: #FFFFEE;
+}
+
+.topic p{
+  font-size: 0.8rem;
+  margin-bottom:2.5rem;
+  color:#192738;
+}
+
+
+
+.topic ul li{
+  list-style:none;
+}
+
+.topic ul li img{
+  width:100%;
+  margin-bottom:10px;
+}
+
+.kotei{
+  background-color:white;
+}
+
+.kotei ul{
+  display:flex;
+  margin-top:30px;
+}
+
+.kotei ul li{
+  list-style:none;
+}
+
+.kotei ul li img{
+  width:80%;
+  
+}
+
+.card{
+  background-color:aliceblue;
+}
+
+.card p{
+  text-align:center;
+  font-size:3rem;
+  padding-top:80px;
+}
+
+.card ul{
+  display:flex;
+  justify-content:center;
+}
+
+.card ul li {
+  list-style:none;
+  margin-bottom:20px;
+}
+
+.card ul li img{
+  width:90%;
+}
+
+.news{
+  background-color:azure;
+  height:500px;
+}
+
+.news p{
+  padding-top:80px;
+  text-align:center;
+  font-size:3rem;
+}
+
+.box{
+  background-color:white;
+  width:80%;
+  display:flex;
+  margin:0 auto ;
+  margin-bottom:5px;
+}
+
+.date{
+  display:flex;
+  margin:5px;
+}
+
+.title{
+  display:flex;
+  margin:5px;
+}
+
+.under{
+  width:100%;
+  display:flex;
+}
+
+.left-side{
+  width:70%;
+  justify-content: space-between;
+}
+
+.right-side{
+  background-color:aliceblue;
+  width:28%;
+  padding:20px;
+  display:flex;
+}
+
+.right-side-mypage{
+  background-color:#CCFF99;
+  width:28%;
+  padding:20px;
+  display:flex;
+}
+
+.minikiji{
+  width:100%;
+}
+
+.miniimage img{
+  width:50px;
+  height:50px;
+  margin-left:10px;
+  margin-bottom:10px;
+  float:left;
+  object-fit: cover;
+}
+
+.minitext{
+  float:left;
+  font-size:0.8rem;
+  margin-left:10px;
+  width:250px;
+}
+
+.minitext p{
+  color:#192738;
+}
+
+.betumono{
+  clear:both;
+}
+
+.rank{
+  color:#555555	;
+}
+
+
+.marushi{
+  background-color:#EEEEEE;
+  text-align:center;
+  clear:both;
+  padding:30px;
+}
+
+.show-title{
+  font-size:30px;
+  background:linear-gradient(transparent 75%, #fff799 75%);
+font-weight:bold; 
+  
+}
+
+.showimage{
+  width:100%;
+  height:200px;
+  object-fit: contain;
+  background-color: #FFFFEE;
+}
+
+a{
+  text-decoration:none !important; 
+}
+
+@media screen and (min-width:740px){
+  .SP{
+    display:none;
+  }
+}
+
+@media screen and (max-width:740px){
+  .right-side{
+    display:none;
+  }
+  
+  .left-side{
+    width:100%;
+    margin:0;
+  }
+  .logo{
+    margin-top:10px;
+  width:200px;
+}
+
+.buttonokini{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 30px;
+  appearance: none;
+}
+
+a{
+  text-decoration:none !important; 
+}
+
+/*.comment-area{*/
+/*  width:800px;*/
+/*}*/
+
+
+
+}

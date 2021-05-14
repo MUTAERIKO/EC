@@ -1,6 +1,6 @@
 
 @extends('layouts.admin')
-@section('title', '一覧')
+@section('title', 'マイページ')
 
 
 @section('content')
@@ -55,11 +55,14 @@
           
           <ul>
             <div class="topickatamari">
-                @foreach ($posts as $goods)
-              <li><a href="{{ route('goodshow',['id'=>$goods->id]) }} "><img src="{{ asset('storage/image/' . $goods->image_path) }}" height="150px" ></a><br>
-                <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><p>{{ $goods->title }}</p></a>
-              </li>
+              
+              
+              @foreach ($goods as $one_goods)
+                <li><a href="{{ route('goodshow',['id'=>$one_goods->id]) }} "><img src="{{ asset('storage/image/' . $one_goods->image_path) }}" height="150px" ></a><br>
+                  <a href="{{ route('goodshow',['id'=>$one_goods->id]) }} "><p>{{ $one_goods->title }}</p></a>
+                </li>
               @endforeach
+              
             </div>
             
           </ul>
@@ -69,19 +72,22 @@
       </div> 
     
 
-      <div class="right-side">
+      <div class="right-side-mypage">
         <div class="minikiji">
-          <div class="rank"><i class="fas fa-crown"></i>　ランキング</div>
+          <div class="rank"><i class="fas fa-book"></i>　バックナンバー</div>
           <hr color="#192738">
-          @foreach($postsninki as $goods)
+          
+          
+          @foreach($backnumbers as $goods)
           <div class="minitext">
-            <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><p><B> {{ $loop->index+1 }}</B> .{{ $goods->title }}</p></a>
+            <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><p><B> {{ $goods->updated_at }}</B> .{{ $goods->title }}</p></a>
           </div>
           <div class="miniimage">
             <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><img src="{{ asset('storage/image/' . $goods->image_path) }} "></a>
           </div>
         <div class="betumono"><hr color="#192738" style="2px"></div>
         @endforeach
+        
         </div>
 
         
@@ -98,43 +104,9 @@
     <!--ここまでに入れてみた-->
      
               
-    <!--<div style="margin-bottom:2rem;"></div>-->
-    
-    <!--@foreach ($posts as $goods)-->
-    <!--<div style="background-color: #99cc00;">-->
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-2">タイトル</label>-->
-    <!--<div class="col-md-10">{{ $goods->title }}</div>-->
-    <!--</div>-->
-    
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-2">画像</label>-->
-    <!--<img src="{{ asset('storage/image/' . $goods->image_path) }} " class="col-md-10">-->
-    
-    <!-- </div>-->
-    
-    <!--<div class="form-group row"> -->
-    <!--<label class="col-md-2">プライス</label>-->
-    <!--<div class="col-md-10"> {{ $goods->price }}</div>-->
-    <!--</div>-->
-    
-    <!--<a href="{{ route('goodshow',['id'=>$goods->id]) }} ">詳細を見る</a>-->
-    <!--</div>-->
-    <!--<div style="margin-bottom:2rem;"></div>-->
-    <!--@endforeach-->
-    
-    
-<!-- サイドバーにするつもり -->
-    <div style="background-color: #333;">
-    @foreach($postsninki as $goods)
-<div class="form-group row">
-        
-    <div class="col-md-10"> {{ $loop->index+1 }}</div>
-    <label class="col-md-2">タイトル</label>
-    <div class="col-md-10"> {{ $goods->price }}</div>
-    
-</div>
-    @endforeach
+    <div style="margin-bottom:2rem;"></div>
+
+
 </div>
     
 

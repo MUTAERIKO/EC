@@ -20,6 +20,7 @@ class CreateGoodsTable extends Migration
             $table->string('price');
             $table->string('intro');
             $table->integer('user_id')->nullable();
+            $table->integer('view_count')->default(0);
             $table->timestamps();
         });
     }

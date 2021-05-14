@@ -28,7 +28,7 @@ class SendComment extends Mailable
      */
     public function build()
     {
-        return $this->view($this->data['template'])
+        return $this->view('mail.reply')
                 ->subject($this->data['subject'])
                 ->from($this->data['email'],$this->data['name'])
                 ->with('data',$this->data);

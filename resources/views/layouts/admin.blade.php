@@ -14,6 +14,8 @@
         <!-- Scripts -->
          {{-- Laravel標準で用意されているJavascriptを読み込みます --}}
         <script src="{{ secure_asset('js/app.js') }}" defer></script>
+        <!--fontawesome-->
+        <script src="/js/app.js"></script>
 
         <!-- Fonts -->
         <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -23,32 +25,67 @@
         {{-- Laravel標準で用意されているCSSを読み込みます --}}
         <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
         {{-- この章の後半で作成するCSSを読み込みます --}}
-        <link href="{{ secure_asset('css/admin.css') }}" rel="stylesheet">
+        <link href="{{ secure_asset('css/trip.css') }}" rel="stylesheet">
+        <!--fontawesome-->
+        <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     </head>
+    
+    
     <body>
-        <div id="app">
-            {{-- 画面上部に表示するナビゲーションバーです。 --}}
-            <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        <!--ここから入れてみるか-->
+        <div class="all">
+    <header>
+      <div class="top">
+        <p><a href="{{ route('index') }}" ><img src="/img/DOKOIKU-logo.png" class="logo"></a></p>
+        <ul>
+          
+         @guest   
+         <a href="{{ route('register') }}"> <li>Register</li></a>
+         <a href="{{ route('login') }}"> <li>Login</li></a>
+         @endguest
+         
+         <a href="{{ route('mypage') }}"> <li>Mypage</li></a>
+         <a href = {{ action('Admin\GoodsController@add') }} role="button" > <li>New</li></a>
+        </ul>
+      </div>
+      <hr color="#192738">
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+
+    </header>
+
+
+        
+        
+        
+        
+        
+        <!--ここまでに入れてみるか-->
+        
+        <!--<div id="app">-->
+        <!--    {{-- 画面上部に表示するナビゲーションバーです。 --}}-->
+        <!--    <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">-->
+        <!--        <div class="container">-->
+        <!--            <a class="navbar-brand" href="{{ url('/') }}">-->
+        <!--                {{ config('app.name', 'Laravel') }}-->
+        <!--            </a>-->
+        <!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+        <!--                <span class="navbar-toggler-icon"></span>-->
+        <!--            </button>-->
+
+        <!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
                         <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
+        <!--                <ul class="navbar-nav mr-auto">-->
 
-                        </ul>
+        <!--                </ul>-->
 
                         <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        <!--                <ul class="navbar-nav ml-auto">-->
+        <!--                </ul>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </nav>-->
             {{-- ここまでナビゲーションバー --}}
 
             <main class="py-4">

@@ -10,13 +10,38 @@
               
     
     <div class="form-group row">
-                        <label class="col-md-2">タイトル</label>
-    <div class="col-md-10"><input type="text" name="title" value=" {{ $goods->title }}"></div>
+    
+    @if($goods->users()->where('user_id', Auth::id())->exists())               
+    <form action= {{ route('goods_user_off', $goods)  }} method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="col-md-10">
+        <input type="hidden" value="{{ $goods->id }}" name="goods_id">
+        
+        <input type="submit" value=" &#xf004; お気に入りを取り消す" class="fas buttonokini">
+     </div>
+    </form>
+    @else
+    <!--取り消すボタン-->
+    <form action= {{ route('goods_user', $goods)  }} method="post" enctype="multipart/form-data">
+    {{ csrf_field() }}
+    <div class="col-md-10">
+        <input type="hidden" value="{{ $goods->id }}" name="goods_id">
+        
+        <input type="submit" value=" &#xf004; お気に入りにする" class="fas buttonokini"></div>
+    </form>
+    @endif
     </div>
     
+    
+    
     <div class="form-group row">
-                        <label class="col-md-2">画像</label>
-     <img src="{{ asset('storage/image/' . $goods->image_path) }} " class="col-md-10">
+                        <!--<label class="col-md-2">タイトル</label>-->
+    <div class="show-title">{{ $goods->title }}</div>
+    </div>
+    
+    <div class="form-group row showimage">
+                        <!--<label class="col-md-2">画像</label>-->
+     <img src="{{ asset('storage/image/' . $goods->image_path) }} " class="showimage">
      </div>
     
     <div class="form-group row">
@@ -39,7 +64,7 @@
 <form action= {{ action('Admin\GoodsController@comment') }} method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     
-    <textarea name="comment" row="10" > {{ old('comment') }}</textarea>
+    <textarea name="comment" row="30" cols="80"> {{ old('comment') }}</textarea>
     
     <input type="hidden" value="{{ $goods->id }}" name="goods_id">
     <input type="submit" value="投稿する">

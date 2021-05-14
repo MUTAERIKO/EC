@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Goods;
 use App\User;
+use App\GoodsUser;
 use App\Mail\SendComment;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+
 
 
 
@@ -37,6 +40,7 @@ class GoodsController extends Controller
 
         unset($form['_token']);
         unset($form['image']);
+    
         $goods->fill($form)->save();
         
         return redirect('admin/goods/');
@@ -50,7 +54,16 @@ class GoodsController extends Controller
         }else{
             $posts = Goods::all()->sortByDesc('updated_at'); 
         }
-        return view('admin/goods/index',['cond_title' => $cond_title, 'posts' => $posts]);
+        
+        
+        // $ninki = $request->ninki;
+        // if ($ninki !=''){
+        //     $postsninki= Goods::take(3)->get();
+        // }else{
+            $postsninki = Goods::take(3)->get()->sortByDesc('view_count');
+            // $postsninki = Goods::all()->sortByDesc('view_count');
+        // }
+        return view('admin/goods/index',['cond_title' => $cond_title, 'posts' => $posts,'postsninki' => $postsninki]);
     }
     
     public function show(Request $request){
@@ -59,12 +72,61 @@ class GoodsController extends Controller
             abort(404);
         }
         
+        // カウント機能
+        $view_count = $goods->view_count;
+        $goods->view_count = $view_count+1;
+        $goods->save();
+        
+        // dd($view_count);
     
         // $user = Auth::user();
         // $user_name = $user->name;
         
         return view('admin.goods.show',['goods'=>$goods]);
     }
+    
+  
+        public function goods_user(Goods $goods){
+            $goods->users()->attach(Auth::id());
+        return back();
+    }
+    
+            public function goods_user_off(Goods $goods){
+            $goods->users()->detach(Auth::id());
+            return back();
+        // return redirect('admin/goods');
+    }
+    
+    
+    public function mypage(Request $request){
+        
+        // お気に入り表示用
+        $cond_title = $request->cond_title;
+        if($cond_title !=''){
+            $goods = Auth::user()->goods::where('title','like','%'.$cond_title.'%')->get();
+        }else{
+            // userが一致したものをUser.phpにリレーションのあるgoodsをよんでくる(中間テーブル使用)
+            $goods = Auth::user()->goods;
+        }
+        if(empty($goods)){
+            abort(404);
+        }
+        
+        // バックナンバー用
+        $user = Auth::user();
+        $backnumbers = Goods::where('user_id', $user->id)->get()->sortByDesc('updated_at');
+        // $backnumbers = DB::table('goods')->where ('user_id','=','2')->get()->sortByDesc('updated_at');
+        // $backnumbers = Goods::where($request->user_id)->get()->sortByDesc('updated_at');
+        
+        if(empty($backnumbers)){
+            abort(404);
+        }
+
+        
+        return view('admin.goods.mypage',['goods'=>$goods,'cond_title' => $cond_title,'backnumbers' => $backnumbers]);
+    }
+    
+    
     
     public function comment(Request $request){
         $this->validate($request,Comment::$rules);
@@ -89,6 +151,9 @@ $data=[
 'title' =>$goods->title,
 'reply_name'=>$user->name,
 ];
+
+
+// dd(Auth::user()->email);
 
 
 Mail::to($user->email)->send(new SendComment($data));

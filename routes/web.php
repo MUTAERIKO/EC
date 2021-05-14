@@ -21,8 +21,12 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
     Route::get('goods/create','Admin\GoodsController@add');
     Route::post('goods/create','Admin\GoodsController@create');
-    Route::get('goods','Admin\GoodsController@index');
-    Route::get('goods/show','Admin\GoodsController@show')->name('goodshow');
+    Route::get('goods','Admin\GoodsController@index')->name('index');
+    Route::get('goods/show/','Admin\GoodsController@show')->name('goodshow');
+    Route::get('goods/mypage','Admin\GoodsController@mypage')->name('mypage');
+    Route::post('goods/goods_user/{goods}','Admin\GoodsController@goods_user')->name('goods_user');
+    Route::post('goods/goods_user_off/{goods}','Admin\GoodsController@goods_user_off')->name('goods_user_off');
+
     Route::get('goods/edit/{id}','Admin\GoodsController@edit')->name('goodsedit');
     Route::post('goods/edit','Admin\GoodsController@update');
     Route::post('goods/comment','Admin\GoodsController@comment');
