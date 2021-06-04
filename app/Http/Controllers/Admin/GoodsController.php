@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Goods;
 use App\User;
+use App\History;
 use App\GoodsUser;
 use App\Mail\SendComment;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 
@@ -43,7 +46,7 @@ class GoodsController extends Controller
     
         $goods->fill($form)->save();
         
-        return redirect('admin/goods/');
+        return redirect('admin/goods/')->with('message','投稿されました');
     }
     
     
@@ -52,9 +55,10 @@ class GoodsController extends Controller
         if($cond_title !=''){
             $posts = Goods::where('title','like','%'.$cond_title.'%')->get();
         }else{
-            $posts = Goods::all()->sortByDesc('updated_at'); 
+            $posts = Goods::orderBy('created_at', 'desc')->paginate(6); 
         }
-        
+        // $posts = Goods::all()->paginate(15)->sortByDesc('updated_at'); 
+        // $posts = DB::table('goods')->paginate(6)->sortByDesc('created_at'); 
         
         // $ninki = $request->ninki;
         // if ($ninki !=''){
@@ -82,7 +86,12 @@ class GoodsController extends Controller
         // $user = Auth::user();
         // $user_name = $user->name;
         
-        return view('admin.goods.show',['goods'=>$goods]);
+        $history = new History;
+        $history->goods_id = $goods->id;
+        $history->edit_at = Carbon::now();
+        $history->save();
+        
+        return view('admin.goods.show',['goods'=>$goods,'history'=>$history]);
     }
     
   
@@ -114,7 +123,7 @@ class GoodsController extends Controller
         
         // バックナンバー用
         $user = Auth::user();
-        $backnumbers = Goods::where('user_id', $user->id)->get()->sortByDesc('updated_at');
+        $backnumbers = Goods::where('user_id', $user->id)->get()->take(5)->sortByDesc('created_at');
         // $backnumbers = DB::table('goods')->where ('user_id','=','2')->get()->sortByDesc('updated_at');
         // $backnumbers = Goods::where($request->user_id)->get()->sortByDesc('updated_at');
         
@@ -166,6 +175,7 @@ Mail::to($user->email)->send(new SendComment($data));
         // if(empty($goods)){
         //     abort(404);
         // }
+        
         return view('admin.goods.edit',['newform'=>$goods]);
     }
     
@@ -188,10 +198,14 @@ Mail::to($user->email)->send(new SendComment($data));
         unset($newform['_token']);
         unset($newform['remove']);
         unset($newform['image']);
-        
         $goods->fill($newform)->save();
         
-        return redirect('admin/goods');
+        $history = new History;
+        $history->goods_id = $goods->id;
+        $history->edit_at = Carbon::now();
+        $history->save();
+    
+        return redirect('admin/goods/');
     }
     
     public function delete(Request $request){

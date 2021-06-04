@@ -79,14 +79,16 @@
           
           
           @foreach($backnumbers as $goods)
+          
           <div class="minitext">
             <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><p><B> {{ $goods->updated_at }}</B> .{{ $goods->title }}</p></a>
           </div>
           <div class="miniimage">
             <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><img src="{{ asset('storage/image/' . $goods->image_path) }} "></a>
           </div>
-        <div class="betumono"><hr color="#192738" style="2px"></div>
-        @endforeach
+          <div class="betumono"><hr color="#192738" style="2px"></div>
+          
+         @endforeach
         
         </div>
 

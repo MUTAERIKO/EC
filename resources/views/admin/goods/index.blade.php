@@ -53,6 +53,10 @@
         <div class="topic">
           <!-- <p>topic</p> -->
           
+          @if(session('message'))
+            {{ session('message') }}
+          @endif
+          
           <ul>
             <div class="topickatamari">
                 @foreach ($posts as $goods)
@@ -60,9 +64,12 @@
                 <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><p>{{ $goods->title }}</p></a>
               </li>
               @endforeach
+             
             </div>
-            
+           
           </ul>
+          {{ $posts->links() }}
+           
         </div>
 
 

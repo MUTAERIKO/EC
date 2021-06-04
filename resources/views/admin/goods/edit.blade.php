@@ -21,6 +21,16 @@
      </ul>
     @endif
     
+    
+    <div class="form-group row">
+        <label class="col-md-2">更新</label>
+        @if($newform->histories != NULL)
+            @foreach( $newform->histories as $history)
+                 <div class="show-title">{{ $history->edit_at }}</div>
+            @endforeach
+        @endif
+    </div>
+    
     <div class="form-group row">
                         <label class="col-md-2">タイトル</label>
     <div class="col-md-10"><input type="text" name="title" value=" {{ old('title',$newform->title) }}"></div>

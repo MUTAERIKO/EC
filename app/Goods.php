@@ -19,8 +19,11 @@ class Goods extends Model
         return $this->hasMany('App\Comment');
         }
         
-        public function users()
-    {
+        public function users(){
         return $this->belongsToMany('App\User');
+    }
+    
+        public function histories(){
+        return $this->hasMany('App\History');
     }
 }

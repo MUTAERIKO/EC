@@ -328,6 +328,10 @@ a{
     display:none;
   }
   
+  .right-side-mypage{
+    display:none;
+  }
+  
   .left-side{
     width:100%;
     margin:0;

@@ -35,6 +35,18 @@
     
     
     <div class="form-group row">
+        <label class="col-md-2">更新</label>
+        @if($goods->histories != NULL)
+            @foreach( $goods->histories as $history)
+                @if ($loop->last)
+                 <div class="col-md-10">{{ $history->edit_at }}</div>
+                 @endif
+            @endforeach
+        @endif
+    </div>
+    
+    
+    <div class="form-group row">
                         <!--<label class="col-md-2">タイトル</label>-->
     <div class="show-title">{{ $goods->title }}</div>
     </div>
