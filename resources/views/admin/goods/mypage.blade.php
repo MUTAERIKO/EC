@@ -21,7 +21,7 @@
      <!--ちょっとここに入れてみるか-->
      
      <div class="kensaku">
-  <form action = {{ action('Admin\GoodsController@index') }} method="get">
+  <form action = {{ action('Admin\GoodsController@mypage') }} method="get">
                     <input type="text" class="kensaku-box" name="cond_title" value=" {{ $cond_title }}"> 
                     {{ csrf_field() }}
                     <input type="submit" name="" class="kensaku-soushin" value="Search">
@@ -64,7 +64,7 @@
               @endforeach
               
             </div>
-            
+            <div class="page">{{ $goods->links() }}</div>
           </ul>
         </div>
 

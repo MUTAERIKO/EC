@@ -138,13 +138,21 @@ header{
 
 .topickatamari li{
   margin-right:30px;
-  width:280px;
+  width:29%;
+  min-width:280px;
   float:left;
 }
 
 .topickatamari li img{
   object-fit: contain;
   background-color: #FFFFEE;
+}
+
+.page{
+  text-align: center;
+  clear: left;
+  margin:0 auto;
+  width:300px;
 }
 
 .topic p{

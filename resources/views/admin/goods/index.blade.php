@@ -64,19 +64,14 @@
                 <a href="{{ route('goodshow',['id'=>$goods->id]) }} "><p>{{ $goods->title }}</p></a>
               </li>
               @endforeach
-             
             </div>
-           
+            <div class="page">{{ $posts->links() }}</div>
           </ul>
-          {{ $posts->links() }}
-           
         </div>
-
-
+        
       </div> 
-    
-
-      <div class="right-side">
+     
+     <div class="right-side">
         <div class="minikiji">
           <div class="rank"><i class="fas fa-crown"></i>　ランキング</div>
           <hr color="#192738">

@@ -27,6 +27,11 @@
     </div>
     
     <div class="form-group row">
+                        <label class="col-md-2">日付</label>
+    <div class="col-md-10"><input type="date" name="date" value=" {{ old('date') }}"></div>
+    </div>
+    
+    <div class="form-group row">
                         <label class="col-md-2">画像</label>
      <div class="col-md-10"><input type="file" name="image" value=" {{ old('image_path') }}"></div>
      </div>

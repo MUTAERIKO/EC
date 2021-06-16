@@ -53,7 +53,9 @@ class GoodsController extends Controller
     public function index(Request $request){
         $cond_title = $request->cond_title;
         if($cond_title !=''){
-            $posts = Goods::where('title','like','%'.$cond_title.'%')->get();
+            $posts = Goods::where('title','like','%'.$cond_title.'%')->paginate(6);
+            //paginateを追加するとエラーになった。getをpagineteに書き換えると解決
+            
         }else{
             $posts = Goods::orderBy('created_at', 'desc')->paginate(6); 
         }
@@ -111,19 +113,43 @@ class GoodsController extends Controller
         
         // お気に入り表示用
         $cond_title = $request->cond_title;
+        
+        
         if($cond_title !=''){
-            $goods = Auth::user()->goods::where('title','like','%'.$cond_title.'%')->get();
+
+            $goods = GoodsUser::select()
+            ->join('goods','goods.id','=','goods_user.goods_id')
+            ->where('title','like','%'.$cond_title.'%')->paginate(2);
+            // sqlで書くと下記みたいになるよ
+            // select * from goods_user join goods on goods.id = goods_user.goods_id where title like '%%';
+            
+            
         }else{
             // userが一致したものをUser.phpにリレーションのあるgoodsをよんでくる(中間テーブル使用)
-            $goods = Auth::user()->goods;
+            $goods = GoodsUser::select()
+            ->join('goods','goods.id','=','goods_user.goods_id')
+            ->paginate(2);
         }
         if(empty($goods)){
             abort(404);
         }
         
+        
+        // テスト
+        // $cond_title = $request->cond_title;
+        // if($cond_title !=''){
+        //     $goods = Auth::user()->goods::where('title','like','%'.$cond_title.'%')->get();
+        // }else{
+        //     // userが一致したものをUser.phpにリレーションのあるgoodsをよんでくる(中間テーブル使用)
+        //     $goods = Auth::user()->goods;
+        // }
+        // if(empty($goods)){
+        //     abort(404);
+        // }
+        
         // バックナンバー用
         $user = Auth::user();
-        $backnumbers = Goods::where('user_id', $user->id)->get()->take(5)->sortByDesc('created_at');
+        $backnumbers = Goods::where('user_id', $user->id)->get()->sortByDesc('created_at')->take(5);
         // $backnumbers = DB::table('goods')->where ('user_id','=','2')->get()->sortByDesc('updated_at');
         // $backnumbers = Goods::where($request->user_id)->get()->sortByDesc('updated_at');
         

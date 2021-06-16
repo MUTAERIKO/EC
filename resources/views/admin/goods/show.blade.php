@@ -51,6 +51,12 @@
     <div class="show-title">{{ $goods->title }}</div>
     </div>
     
+    
+    <div class="form-group row">
+                        <!--<label class="col-md-2">タイトル</label>-->
+    <div class="show-date">{{ $goods->date }}</div>
+    </div>
+    
     <div class="form-group row showimage">
                         <!--<label class="col-md-2">画像</label>-->
      <img src="{{ asset('storage/image/' . $goods->image_path) }} " class="showimage">

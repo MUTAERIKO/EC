@@ -13,6 +13,12 @@ class CreateHistoriesTable extends Migration
      */
     public function up()
     {
+        
+        if (Schema::hasTable('histories')) {
+            // テーブルが存在していればリターン
+            return;
+        }
+        
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
             $table->integer('goods_id');
